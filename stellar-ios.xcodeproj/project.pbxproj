@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5C8A072EBD224616B5C1405A /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F30C075A7B8649A5ADB12E07 /* libPods.a */; };
 		66C32BA1198E71FF006D4AE5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66C32BA0198E71FF006D4AE5 /* AppDelegate.swift */; };
 		66C32BA3198E71FF006D4AE5 /* MasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66C32BA2198E71FF006D4AE5 /* MasterViewController.swift */; };
 		66C32BA5198E71FF006D4AE5 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66C32BA4198E71FF006D4AE5 /* DetailViewController.swift */; };
@@ -26,6 +27,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		6653514E198E7CBD00AC452E /* stellar-ios-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "stellar-ios-Bridging-Header.h"; sourceTree = "<group>"; };
 		66C32B9B198E71FF006D4AE5 /* stellar-ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "stellar-ios.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		66C32B9F198E71FF006D4AE5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		66C32BA0198E71FF006D4AE5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -36,6 +38,8 @@
 		66C32BAF198E7200006D4AE5 /* stellar-iosTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "stellar-iosTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		66C32BB4198E7200006D4AE5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		66C32BB5198E7200006D4AE5 /* stellar_iosTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = stellar_iosTests.swift; sourceTree = "<group>"; };
+		B1840C34317D4EFA9AA3634B /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
+		F30C075A7B8649A5ADB12E07 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -43,6 +47,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5C8A072EBD224616B5C1405A /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -56,12 +61,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3212A7A24A524913B3C01094 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				F30C075A7B8649A5ADB12E07 /* libPods.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		66C32B92198E71FF006D4AE5 = {
 			isa = PBXGroup;
 			children = (
 				66C32B9D198E71FF006D4AE5 /* stellar-ios */,
 				66C32BB2198E7200006D4AE5 /* stellar-iosTests */,
 				66C32B9C198E71FF006D4AE5 /* Products */,
+				B1840C34317D4EFA9AA3634B /* Pods.xcconfig */,
+				3212A7A24A524913B3C01094 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -83,6 +98,7 @@
 				66C32BA6198E7200006D4AE5 /* Main.storyboard */,
 				66C32BA9198E7200006D4AE5 /* Images.xcassets */,
 				66C32B9E198E71FF006D4AE5 /* Supporting Files */,
+				6653514E198E7CBD00AC452E /* stellar-ios-Bridging-Header.h */,
 			);
 			path = "stellar-ios";
 			sourceTree = "<group>";
@@ -119,9 +135,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 66C32BB9198E7200006D4AE5 /* Build configuration list for PBXNativeTarget "stellar-ios" */;
 			buildPhases = (
+				E220CDE4AA2F43BFA042EC00 /* Check Pods Manifest.lock */,
 				66C32B97198E71FF006D4AE5 /* Sources */,
 				66C32B98198E71FF006D4AE5 /* Frameworks */,
 				66C32B99198E71FF006D4AE5 /* Resources */,
+				40E2E805B79546079C3A801B /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -205,6 +223,39 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		40E2E805B79546079C3A801B /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E220CDE4AA2F43BFA042EC00 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		66C32B97198E71FF006D4AE5 /* Sources */ = {
@@ -328,23 +379,30 @@
 		};
 		66C32BBA198E7200006D4AE5 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B1840C34317D4EFA9AA3634B /* Pods.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = "stellar-ios/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "stellar-ios/stellar-ios-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
 		66C32BBB198E7200006D4AE5 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B1840C34317D4EFA9AA3634B /* Pods.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = "stellar-ios/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "stellar-ios/stellar-ios-Bridging-Header.h";
 			};
 			name = Release;
 		};
@@ -403,6 +461,7 @@
 				66C32BBB198E7200006D4AE5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		66C32BBC198E7200006D4AE5 /* Build configuration list for PBXNativeTarget "stellar-iosTests" */ = {
 			isa = XCConfigurationList;
@@ -411,6 +470,7 @@
 				66C32BBE198E7200006D4AE5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
