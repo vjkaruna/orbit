@@ -15,8 +15,11 @@ class MasterViewController: UITableViewController, WKScriptMessageHandler {
     var objects = NSMutableArray()
     
     var webView: WKWebView?
+    var origView: UIView?
     
     func userContentController(userContentController: WKUserContentController!, didReceiveScriptMessage message:WKScriptMessage!){
+        
+        
         // println("got message: \(message.body)")
         var mystring = "got message: \(message.body)"
         var alert = UIAlertController(title: mystring,
@@ -27,7 +30,34 @@ class MasterViewController: UITableViewController, WKScriptMessageHandler {
                 alert.dismissViewControllerAnimated(true) {}
         }
         alert.addAction(OKAction)
-        self.presentViewController(alert, animated: true) {}
+        // self.presentViewController(alert, animated: true) {}
+        
+        // self.webView!.hidden = true
+        // self.view = self.origView!
+
+        // var jsonResult: NSDictionary = NSJSONSerialization.JSONObjectWithData(message.body as NSData, options: NSJSONReadingOptions.MutableContainers, error: nil) as NSDictionary
+        var sentData = message.body as NSDictionary
+        // self.navigationController.navigationItem.title = sentData["username"] as NSString
+        // insertNewObject(sentData["username"] as NSString)
+        // insertNewObject("success")
+        
+        var secret = sentData["secret"] as NSString
+        var account = sentData["account"] as NSString
+        var myid = sentData["id"] as NSString
+        
+        println("secret:\(secret) account:\(account)")
+        
+        let manager = AFHTTPRequestOperationManager()
+        var parameters = ["id":myid]
+        manager.requestSerializer = AFJSONRequestSerializer()
+        manager.POST( "https://wallet.stellar.org/wallets/show",
+            parameters: parameters,
+            success: { (operation: AFHTTPRequestOperation!,responseObject: AnyObject!) in
+                println("JSON: " + responseObject.description)
+            },
+            failure: { (operation: AFHTTPRequestOperation!,error: NSError!) in
+                println("Error: " + error.localizedDescription)
+            })
      }
     
     override func loadView() {
@@ -47,7 +77,7 @@ class MasterViewController: UITableViewController, WKScriptMessageHandler {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
+        // sample url running a stripped-down reference web client that will post data back to WKWebView
         let url = NSURL(string: "http://stellar-client-webkit.s3-website-us-west-2.amazonaws.com/#/login")
         let req = NSURLRequest(URL: url)
         
@@ -57,7 +87,11 @@ class MasterViewController: UITableViewController, WKScriptMessageHandler {
             name: "interOp")
         self.webView = WKWebView(frame:self.view.frame,
             configuration: theConfiguration)
-        self.view = self.webView
+        
+        //self.webView!.loadRequest(req)
+        self.origView = self.view
+        // self.view = self.webView!
+        self.view.addSubview(self.webView)
         self.webView!.loadRequest(req)
   
         
@@ -95,7 +129,7 @@ class MasterViewController: UITableViewController, WKScriptMessageHandler {
         if objects == nil {
             objects = NSMutableArray()
         }
-        objects.insertObject(NSDate.date(), atIndex: 0)
+        objects.insertObject(sender as NSString, atIndex: 0)
         let indexPath = NSIndexPath(forRow: 0, inSection: 0)
         self.tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
     }
