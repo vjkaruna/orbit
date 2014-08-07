@@ -8,12 +8,14 @@
 
 /* Begin PBXBuildFile section */
 		5C8A072EBD224616B5C1405A /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F30C075A7B8649A5ADB12E07 /* libPods.a */; };
+		6619A6411991E55500441B63 /* Wallet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6619A6401991E55500441B63 /* Wallet.swift */; };
 		66C32BA1198E71FF006D4AE5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66C32BA0198E71FF006D4AE5 /* AppDelegate.swift */; };
 		66C32BA3198E71FF006D4AE5 /* MasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66C32BA2198E71FF006D4AE5 /* MasterViewController.swift */; };
 		66C32BA5198E71FF006D4AE5 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66C32BA4198E71FF006D4AE5 /* DetailViewController.swift */; };
 		66C32BA8198E7200006D4AE5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 66C32BA6198E7200006D4AE5 /* Main.storyboard */; };
 		66C32BAA198E7200006D4AE5 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 66C32BA9198E7200006D4AE5 /* Images.xcassets */; };
 		66C32BB6198E7200006D4AE5 /* stellar_iosTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66C32BB5198E7200006D4AE5 /* stellar_iosTests.swift */; };
+		66EE7B06199179C1000A1625 /* Alamofire.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66EE7B05199179C1000A1625 /* Alamofire.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -27,6 +29,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		6619A6401991E55500441B63 /* Wallet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Wallet.swift; sourceTree = "<group>"; };
 		6653514E198E7CBD00AC452E /* stellar-ios-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "stellar-ios-Bridging-Header.h"; sourceTree = "<group>"; };
 		66C32B9B198E71FF006D4AE5 /* stellar-ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "stellar-ios.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		66C32B9F198E71FF006D4AE5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -38,6 +41,7 @@
 		66C32BAF198E7200006D4AE5 /* stellar-iosTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "stellar-iosTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		66C32BB4198E7200006D4AE5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		66C32BB5198E7200006D4AE5 /* stellar_iosTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = stellar_iosTests.swift; sourceTree = "<group>"; };
+		66EE7B05199179C1000A1625 /* Alamofire.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Alamofire.swift; path = alamofire/Source/Alamofire.swift; sourceTree = SOURCE_ROOT; };
 		B1840C34317D4EFA9AA3634B /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 		F30C075A7B8649A5ADB12E07 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -94,6 +98,8 @@
 			children = (
 				66C32BA0198E71FF006D4AE5 /* AppDelegate.swift */,
 				66C32BA2198E71FF006D4AE5 /* MasterViewController.swift */,
+				6619A6401991E55500441B63 /* Wallet.swift */,
+				66EE7B05199179C1000A1625 /* Alamofire.swift */,
 				66C32BA4198E71FF006D4AE5 /* DetailViewController.swift */,
 				66C32BA6198E7200006D4AE5 /* Main.storyboard */,
 				66C32BA9198E7200006D4AE5 /* Images.xcassets */,
@@ -262,8 +268,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6619A6411991E55500441B63 /* Wallet.swift in Sources */,
 				66C32BA5198E71FF006D4AE5 /* DetailViewController.swift in Sources */,
 				66C32BA3198E71FF006D4AE5 /* MasterViewController.swift in Sources */,
+				66EE7B06199179C1000A1625 /* Alamofire.swift in Sources */,
 				66C32BA1198E71FF006D4AE5 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

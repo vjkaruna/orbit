@@ -13,6 +13,7 @@ class MasterViewController: UITableViewController, WKScriptMessageHandler {
 
     var detailViewController: DetailViewController? = nil
     var objects = NSMutableArray()
+    var wallet: Wallet? = nil
     
     var webView: WKWebView?
     var origView: UIView?
@@ -30,13 +31,14 @@ class MasterViewController: UITableViewController, WKScriptMessageHandler {
                 alert.dismissViewControllerAnimated(true) {}
         }
         alert.addAction(OKAction)
-        // self.presentViewController(alert, animated: true) {}
+        self.presentViewController(alert, animated: true) {}
         
         // self.webView!.hidden = true
         // self.view = self.origView!
 
         // var jsonResult: NSDictionary = NSJSONSerialization.JSONObjectWithData(message.body as NSData, options: NSJSONReadingOptions.MutableContainers, error: nil) as NSDictionary
         var sentData = message.body as NSDictionary
+        println(sentData)
         // self.navigationController.navigationItem.title = sentData["username"] as NSString
         // insertNewObject(sentData["username"] as NSString)
         // insertNewObject("success")
@@ -47,6 +49,7 @@ class MasterViewController: UITableViewController, WKScriptMessageHandler {
         
         println("secret:\(secret) account:\(account)")
         
+        /**
         let manager = AFHTTPRequestOperationManager()
         var parameters = ["id":myid]
         manager.requestSerializer = AFJSONRequestSerializer()
@@ -58,6 +61,15 @@ class MasterViewController: UITableViewController, WKScriptMessageHandler {
             failure: { (operation: AFHTTPRequestOperation!,error: NSError!) in
                 println("Error: " + error.localizedDescription)
             })
+        **/
+        
+        Alamofire.request(.POST, "https://live.stellar.org:9002", parameters: ["method":"account_lines", "params":[["account":"\(account)"]]], encoding: .JSON(options: nil))
+            .responseJSON { (request, response, JSON, error) in
+                
+        }
+        
+        
+        
      }
     
     override func loadView() {
@@ -91,7 +103,7 @@ class MasterViewController: UITableViewController, WKScriptMessageHandler {
         //self.webView!.loadRequest(req)
         self.origView = self.view
         // self.view = self.webView!
-        self.view.addSubview(self.webView)
+        self.view.addSubview(self.webView!)
         self.webView!.loadRequest(req)
   
         
