@@ -12,8 +12,8 @@ import WebKit
 class MasterViewController: UITableViewController, WKScriptMessageHandler {
 
     var detailViewController: DetailViewController? = nil
-    var objects = NSMutableArray()
     var wallet: Wallet? = nil
+    var trustlines = [Trustline]()
     
     var webView: WKWebView?
     var origView: UIView?
@@ -22,6 +22,7 @@ class MasterViewController: UITableViewController, WKScriptMessageHandler {
         
         
         // println("got message: \(message.body)")
+        /**
         var mystring = "got message: \(message.body)"
         var alert = UIAlertController(title: mystring,
             message: "",
@@ -32,6 +33,7 @@ class MasterViewController: UITableViewController, WKScriptMessageHandler {
         }
         alert.addAction(OKAction)
         self.presentViewController(alert, animated: true) {}
+        **/
         
         // self.webView!.hidden = true
         // self.view = self.origView!
@@ -64,9 +66,23 @@ class MasterViewController: UITableViewController, WKScriptMessageHandler {
         **/
         
         Alamofire.request(.POST, "https://live.stellar.org:9002", parameters: ["method":"account_lines", "params":[["account":"\(account)"]]], encoding: .JSON(options: nil))
-            .responseJSON { (request, response, JSON, error) in
-                
+            .response { (request, response, data, error) in
+                self.webView!.hidden = true
+                let JSON = JSONValue(data as NSData)
+                println(JSON["result"]["lines"][0])
+                // let tlvals = JSON!.valueForKeyPath("result")!.valueForKeyPath("lines")! as Array<Dictionary<String, AnyObject>>
+                let tlvals = JSON["result"]["lines"].array
+                var new_trustlines = [Trustline]()
+                if tlvals!.count > 0 {
+                    tlvals!.map { dict in println(dict["currency"].string) }
+                    new_trustlines = tlvals!.map { dict in Trustline(json:dict) }
+                }
+                for tl in new_trustlines {
+                    println(tl.limit)
+                    self.insertNewObject(tl)
+                }
         }
+
         
         
         
@@ -138,10 +154,7 @@ class MasterViewController: UITableViewController, WKScriptMessageHandler {
     }
 
     func insertNewObject(sender: AnyObject) {
-        if objects == nil {
-            objects = NSMutableArray()
-        }
-        objects.insertObject(sender as NSString, atIndex: 0)
+        trustlines.append(sender as Trustline)
         let indexPath = NSIndexPath(forRow: 0, inSection: 0)
         self.tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
     }
@@ -151,8 +164,8 @@ class MasterViewController: UITableViewController, WKScriptMessageHandler {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "showDetail" {
             let indexPath = self.tableView.indexPathForSelectedRow()
-            let object = objects[indexPath.row] as NSDate
-            ((segue.destinationViewController as UINavigationController).topViewController as DetailViewController).detailItem = object
+            let tl = trustlines[indexPath.row] as Trustline
+            ((segue.destinationViewController as UINavigationController).topViewController as DetailViewController).detailItem = tl
         }
     }
 
@@ -163,14 +176,14 @@ class MasterViewController: UITableViewController, WKScriptMessageHandler {
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return objects.count
+        return trustlines.count
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as UITableViewCell
 
-        let object = objects[indexPath.row] as NSDate
-        cell.textLabel.text = object.description
+        let tl = trustlines[indexPath.row] as Trustline
+        cell.textLabel.text = tl.description
         return cell
     }
 
@@ -181,7 +194,7 @@ class MasterViewController: UITableViewController, WKScriptMessageHandler {
 
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == .Delete {
-            objects.removeObjectAtIndex(indexPath.row)
+            // objects.removeObjectAtIndex(indexPath.row)
             tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
         } else if editingStyle == .Insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view.
@@ -190,8 +203,8 @@ class MasterViewController: UITableViewController, WKScriptMessageHandler {
 
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if UIDevice.currentDevice().userInterfaceIdiom == .Pad {
-            let object = objects[indexPath.row] as NSDate
-            self.detailViewController!.detailItem = object
+            let tl = trustlines[indexPath.row] as Trustline
+            self.detailViewController!.detailItem = tl
         }
     }
 

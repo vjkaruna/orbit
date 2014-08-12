@@ -8,8 +8,8 @@
 
 import Foundation
 
-struct Wallet {
-    let secret: NSString
-    let account: NSString
-    let id: Int64
+class Wallet {
+    var secret = ""
+    var account = ""
+    var id = 0
 }
