@@ -11,6 +11,7 @@ import UIKit
 class DetailViewController: UIViewController, UISplitViewControllerDelegate {
 
     @IBOutlet var detailDescriptionLabel: UILabel!
+    @IBOutlet var accountLabel: UILabel!
     var masterPopoverController: UIPopoverController? = nil
 
 
@@ -30,6 +31,9 @@ class DetailViewController: UIViewController, UISplitViewControllerDelegate {
         if let detail: AnyObject = self.detailItem {
             if let label = self.detailDescriptionLabel {
                 label.text = detail.description
+            }
+            if let acc_label = self.accountLabel {
+                acc_label.text = (detail as Trustline).account
             }
         }
     }

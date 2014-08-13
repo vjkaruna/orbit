@@ -14,6 +14,7 @@ class MasterViewController: UITableViewController, WKScriptMessageHandler {
     var detailViewController: DetailViewController? = nil
     var wallet: Wallet? = nil
     var trustlines = [Trustline]()
+    var wallpaper: UIImageView?
     
     var webView: WKWebView?
     var origView: UIView?
@@ -68,6 +69,7 @@ class MasterViewController: UITableViewController, WKScriptMessageHandler {
         Alamofire.request(.POST, "https://live.stellar.org:9002", parameters: ["method":"account_lines", "params":[["account":"\(account)"]]], encoding: .JSON(options: nil))
             .response { (request, response, data, error) in
                 self.webView!.hidden = true
+                // self.navigationItem. = UIBarButtonItem(title: "Trustlines", style: .Plain, target: self, action: nil)
                 let JSON = JSONValue(data as NSData)
                 println(JSON["result"]["lines"][0])
                 // let tlvals = JSON!.valueForKeyPath("result")!.valueForKeyPath("lines")! as Array<Dictionary<String, AnyObject>>
@@ -121,6 +123,13 @@ class MasterViewController: UITableViewController, WKScriptMessageHandler {
         // self.view = self.webView!
         self.view.addSubview(self.webView!)
         self.webView!.loadRequest(req)
+        
+        self.wallpaper = UIImageView(frame:self.navigationController.view.bounds)
+        self.wallpaper!.image = UIImage(named:"wallpaper-default")
+        self.wallpaper!.contentMode = .Left
+        self.navigationController.view.insertSubview(wallpaper!,atIndex:0)
+        
+        //self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Login", style: .Plain, target: self, action: nil)
   
         
         /**
@@ -155,7 +164,7 @@ class MasterViewController: UITableViewController, WKScriptMessageHandler {
 
     func insertNewObject(sender: AnyObject) {
         trustlines.append(sender as Trustline)
-        let indexPath = NSIndexPath(forRow: 0, inSection: 0)
+        let indexPath = NSIndexPath(forRow: trustlines.count-1, inSection: 0)
         self.tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
     }
 
@@ -180,10 +189,17 @@ class MasterViewController: UITableViewController, WKScriptMessageHandler {
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as TrustlineCell
 
         let tl = trustlines[indexPath.row] as Trustline
-        cell.textLabel.text = tl.description
+        println("Row \(indexPath.row) \(tl.limit)")
+        if (tl != nil && tl.account != nil) {
+            let acc = tl.account!.substringToIndex(advance(tl.account!.startIndex, 16))
+            cell.accountLabel!.text = "\(acc)..."
+            cell.balanceLabel!.text = "\(tl.balance!)"
+            cell.limitLabel!.text = "/ \(tl.limit!)"
+            cell.currencyLabel!.text = "\(tl.currency!)"
+        }
         return cell
     }
 
