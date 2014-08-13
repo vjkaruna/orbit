@@ -43,8 +43,6 @@ class MasterViewController: UITableViewController, WKScriptMessageHandler {
         var sentData = message.body as NSDictionary
         println(sentData)
         // self.navigationController.navigationItem.title = sentData["username"] as NSString
-        // insertNewObject(sentData["username"] as NSString)
-        // insertNewObject("success")
         
         var secret = sentData["secret"] as NSString
         var account = sentData["account"] as NSString
@@ -143,17 +141,6 @@ class MasterViewController: UITableViewController, WKScriptMessageHandler {
             self.detailViewController = controllers[controllers.endIndex-1].topViewController as? DetailViewController
         }
         
-        let manager = AFHTTPRequestOperationManager()
-        var parameters = ["id":"0a8efc506ab7823ec294e825e74d5efff3c9adcec654321fab4267b805c26879"]
-        manager.requestSerializer = AFJSONRequestSerializer()
-        manager.POST( "https://wallet.stellar.org/wallets/show",
-            parameters: parameters,
-            success: { (operation: AFHTTPRequestOperation!,responseObject: AnyObject!) in
-                println("JSON: " + responseObject.description)
-            },
-            failure: { (operation: AFHTTPRequestOperation!,error: NSError!) in
-                println("Error: " + error.localizedDescription)
-            })
         **/
     }
 
