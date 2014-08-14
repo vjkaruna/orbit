@@ -1,9 +1,10 @@
 Orbit
 ===========
+![App Icon](https://raw.githubusercontent.com/vjkaruna/orbit/master/stellar-ios/Images.xcassets/AppIcon.appiconset/stellar-icon-60pt.png)
 
 iOS Stellar client with multicurrency support (alpha)
 
-![alt tag](https://raw.githubusercontent.com/vjkaruna/stellar-ios/master/readme_screenshot_1.png)
+![Screenshot 1](https://raw.githubusercontent.com/vjkaruna/stellar-ios/master/readme_screenshot_1.png)
 
 Orbit is a Stellar client for iOS 8 written in Swift. By default, it authenticates with the launch Stellar wallets at wallet.stellar.org, and the gateway hosted at live.stellar.org. 
 
